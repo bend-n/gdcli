@@ -1,0 +1,34 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Arg",
+"language": "GDScript",
+"path": "res://addons/Arg.gd"
+}, {
+"base": "Reference",
+"class": "Parser",
+"language": "GDScript",
+"path": "res://addons/Parser.gd"
+} ]
+_global_script_class_icons={
+"Arg": "",
+"Parser": ""
+}
+
+[application]
+
+config/name="gdcli"
+run/main_scene="res://Main.tscn"
+
+[editor]
+
+main_run_args=" --radiation rad crad -bard rofl"
