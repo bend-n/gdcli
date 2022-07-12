@@ -3,7 +3,7 @@ class_name Arg
 
 var n_args := 0
 var arg_type := ""  # can be *
-var triggers: PoolStringArray = []
+var triggers := []
 var help := ""
 var arg_names := ""
 var action := "store"
@@ -24,8 +24,8 @@ func _init(
 		n_args = 0,
 		help = "",
 		dest = "",
-		default = "",
-		arg_names = "",
+		default = "",  # the default when (no/not enough) value(s) are given
+		arg_names = "",  # names of the arguments, in string format, used in the help message
 		action = "store"
 	}
 ) -> void:
@@ -45,10 +45,6 @@ func opt_get(opt: Dictionary, key: String, df):
 	return opt[key] if key in opt else df
 
 
-func add_trigger(t: String) -> void:
-	triggers.append(t)
-
-
 func get_arg_names():
 	var r_names := ""
 	if not arg_type:
@@ -60,10 +56,11 @@ func get_arg_names():
 
 
 func small_arg() -> String:
-	var small := ""
-	for t in triggers:
-		small = t if len(t) < len(small) or !small else small
-	return small
+	return triggers.min()
+
+
+func long_arg() -> String:
+	return triggers.max()
 
 
 func dest_name() -> String:
@@ -71,4 +68,4 @@ func dest_name() -> String:
 
 
 func format_triggers() -> String:
-	return "%s %s" % [triggers.join(", "), "[%s]" % arg_names if arg_names else ""]
+	return "%s %s" % [PoolStringArray(triggers).join(", "), "[%s]" % arg_names if arg_names else ""]
