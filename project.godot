@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Arg",
 "language": "GDScript",
-"path": "res://addons/Arg.gd"
+"path": "res://addons/gdcli/Arg.gd"
 }, {
 "base": "Reference",
 "class": "Parser",
 "language": "GDScript",
-"path": "res://addons/Parser.gd"
+"path": "res://addons/gdcli/Parser.gd"
 } ]
 _global_script_class_icons={
 "Arg": "",

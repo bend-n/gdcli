@@ -17,10 +17,12 @@ func parse_arguments():
 		i += 1
 		var res := __search_target_args(cmdline_args[i])
 		if res:
-			if res.n_args:
+			star = ""
+			if res.action == "store":
 				args[res.dest] = cmdline_args.slice(i + 1, i + res.n_args)
 				i += res.n_args
-				star = ""
+			elif res.action == "store_true":
+				args[res.dest] = true
 			else:
 				match res.arg_type:
 					"*":
@@ -29,7 +31,6 @@ func parse_arguments():
 		else:
 			if star:
 				args[star].append(cmdline_args[i])
-				breakpoint
 			else:
 				args.unhandled.append(cmdline_args[i])
 	for r in target_args:
@@ -45,28 +46,44 @@ func __search_target_args(to_find: String) -> Arg:
 	return null
 
 
-func help() -> String:
+func help(description := "") -> String:
 	var size = 1
 	for arg in target_args:  # find the longest arguments
 		size = len(arg.format_triggers()) if len(arg.format_triggers()) > size else size
 
 	var options := ""
-	var usage := "godot "
+	var usage := (
+		"%s%s [options...]"
+		% [ProjectSettings.get_setting("application/config/name"), exec_ext()]
+	)
 	for arg in target_args:
-		usage += "[%s] " % arg.small_arg()
 		options += arg.format_triggers() + "   "
 
 		for _i in range(size - len(arg.format_triggers())):
-			options += " "
+			options += " "  # add spaces to align the options
 		options += arg.help + "\n"
 	var help = """
 usage: {usage}
-
 {description}
-
 options: 
 {options}
 """.format(
-		{usage = usage, description = "", options = options.indent("  ")}
+		{
+			usage = usage,
+			description = "\n%s\n" % description if description else "",
+			options = options.indent("  ")
+		}
 	)
 	return help
+
+
+static func exec_ext() -> String:
+	if OS.has_feature("Windows"):
+		return ".exe"
+	elif OS.has_feature("OSX"):
+		return ""
+	elif OS.has_feature("X11"):
+		return ".x86_64"
+	elif OS.has_feature("web"):
+		return ".html" # how do you ever manage to get here tho
+	return ""
