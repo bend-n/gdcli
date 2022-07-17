@@ -34,11 +34,7 @@ func parse_arguments():
 					if __search_target_args(c):  # if it is a argument
 						if !res.default:  # and there is no default
 							var errstr = "Missing %s argument%s for %s"
-							var lent = (
-								len(args[res.dest]) - res.n_args
-								if res.dest in args
-								else -res.n_args
-							)
+							var lent = len(args[res.dest]) - res.n_args if res.dest in args else -res.n_args
 							errstr = errstr % [lent * -1, "s" if lent < -1 else "", current]
 							push_error(errstr)
 							return null  # and return
@@ -82,10 +78,7 @@ func help(description := "") -> String:
 		size = len(arg.format_triggers()) if len(arg.format_triggers()) > size else size
 
 	var options := ""
-	var usage := (
-		"%s%s [options...]"
-		% [ProjectSettings.get_setting("application/config/name"), exec_ext()]
-	)
+	var usage := "%s%s [options...]" % [ProjectSettings.get_setting("application/config/name"), exec_ext()]
 	for arg in target_args:
 		options += arg.format_triggers() + "   "
 

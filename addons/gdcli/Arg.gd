@@ -18,16 +18,8 @@ func find_trigger(to_find: String) -> String:
 	return ""
 
 
-func _init(
-	options := {
-		triggers = [],
-		n_args = 0,
-		help = "",
-		dest = "",
-		default = "",  # the default when (no/not enough) value(s) are given
-		arg_names = "",  # names of the arguments, in string format, used in the help message
-		action = "store"
-	}
+func _init(  # the default when (no/not enough) value(s) are given  # names of the arguments, in string format, used in the help message
+	options := {triggers = [], n_args = 0, help = "", dest = "", default = "", arg_names = "", action = "store"}
 ) -> void:
 	help = opt_get(options, "help", "")
 	action = opt_get(options, "action", "store")
