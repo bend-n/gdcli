@@ -30,15 +30,16 @@ func _init(
 	}
 ) -> void:
 	help = opt_get(options, "help", "")
+	action = opt_get(options, "action", "store")
 	triggers = opt_get(options, "triggers", [])
 	if typeof(opt_get(options, "n_args", 0)) == TYPE_STRING:
 		arg_type = opt_get(options, "n_args", "")
+		action = ""
 	else:
 		n_args = opt_get(options, "n_args", 0)
 	dest = opt_get(options, "dest", dest_name())
 	default = opt_get(options, "default", "")
 	arg_names = opt_get(options, "arg_names", get_arg_names())
-	action = opt_get(options, "action", "store")
 
 
 func opt_get(opt: Dictionary, key: String, df):

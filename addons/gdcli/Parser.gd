@@ -59,11 +59,13 @@ func parse_arguments():
 					"*":
 						star = res.dest
 						args[res.dest] = cmdline_args.slice(i + 1, i)
+		elif star:
+			args[star].append(current)
 		else:
-			if star:
-				args[star].append(cmdline_args[i])
-			else:
-				args.unhandled.append(cmdline_args[i])
+			args.unhandled.append(current)
+	for k in args:
+		if typeof(args[k]) == TYPE_ARRAY:
+			args[k] = PoolStringArray(args[k])
 	return args
 
 
