@@ -1,14 +1,6 @@
-# godot cli options parser
-
-[![package](https://img.shields.io/npm/v/@bendn/gdcli?label=version&style=for-the-badge)](https://www.npmjs.com/package/@bendn/gdcli)
+# godot cli parser
 
 A utility for parsing command line arguments for godot.
-
-> **Warning**
->
-> Waiting 4 [godot-proposals/4815](https://github.com/godotengine/godot-proposals/issues/4815) for the full experience.
-
----
 
 ## Features
 

@@ -19,7 +19,12 @@ func parse_arguments():
 		var res := __search_target_args(current)
 		if res:  #       if we found a arg
 			star = ""  # reset the star
-			if res.action == "store":
+			if res.arg_type:
+				match res.arg_type:
+					"*":
+						star = res.dest
+						args[res.dest] = cmdline_args.slice(i + 1, i)
+			elif res.action == "store":
 				var length = cmdline_args.slice(i + 1, i + res.n_args).size() - res.n_args
 				if length != 0:
 					if res.default:
@@ -54,16 +59,14 @@ func parse_arguments():
 						args[res.dest].append(c)
 			elif res.action == "store_true":
 				args[res.dest] = true
-			else:
-				match res.arg_type:
-					"*":
-						star = res.dest
-						args[res.dest] = cmdline_args.slice(i + 1, i)
 		else:
 			if star:
 				args[star].append(cmdline_args[i])
 			else:
 				args.unhandled.append(cmdline_args[i])
+	for k in args:
+		if typeof(args[k]) == TYPE_ARRAY:
+			args[k] = PoolStringArray(args[k])
 	return args
 
 

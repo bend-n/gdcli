@@ -1,0 +1,24 @@
+{
+  "name": "@bendn/gdcli",
+  "version": "1.2.5",
+  "description": "godot cli utility",
+  "main": "Parser.gd",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bend-n/gdcli.git"
+  },
+  "keywords": [
+    "godot",
+    "godot-engine",
+    "cli"
+  ],
+  "author": "bendn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bend-n/gdcli/issues"
+  },
+  "homepage": "https://github.com/bend-n/gdcli#readme"
+}
