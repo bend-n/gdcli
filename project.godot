@@ -6,9 +6,9 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
-_global_script_classes=[ {
+_global_script_classes=[{
 "base": "Reference",
 "class": "Arg",
 "language": "GDScript",
@@ -18,7 +18,7 @@ _global_script_classes=[ {
 "class": "Parser",
 "language": "GDScript",
 "path": "res://addons/gdcli/Parser.gd"
-} ]
+}]
 _global_script_class_icons={
 "Arg": "",
 "Parser": ""
@@ -28,6 +28,7 @@ _global_script_class_icons={
 
 config/name="gdcli"
 run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.1")
 
 [editor]
 
